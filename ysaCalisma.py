@@ -48,9 +48,29 @@ for i in range(satir):
 r.shuffle(veri) # Veriler satır sırasına göre rastgele karıştırıldı.
 
 egitim_veri = veri[0:round(satir * 0.8)] 
+
 # Toplam satır sayısının %80'iyle eğitim verisi oluşturuldu.
 
 test_veri = veri[-round(satir * 0.2):]
+
 # Toplam satır sayısının %20'siyle test verisi oluşturuldu.
 
 # Üçüncü ve dördüncü aşama tamamlandı!
+
+girdi = int(input("Kaç girdi mevcut: "))
+cikti = int(input("Kaç çıktı mevcut: "))
+ara_katman = int(input("Ara katman sayısı kaç olsun istersiniz: "))
+
+print("{}-{}-{} şeklindeki yapay sinir ağı oluşturuluyor...".format(girdi, ara_katman, cikti))
+
+e_girdi_verileri = [x[:girdi] for x in egitim_veri]
+t_girdi_verileri = [x[:girdi] for x in test_veri]
+
+# Eğitim ve Test verileri için girdi matrisi oluşturuldu.
+
+e_cikti_verileri = [x[-cikti:] for x in egitim_veri]
+t_cikti_verileri = [x[-cikti:] for x in test_veri]
+
+# Eğitim ve Test verileri için çıktı matrisi oluşturuldu.
+
+# Beşinci aşama tamamlandı!
