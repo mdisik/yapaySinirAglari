@@ -44,3 +44,13 @@ for i in range(satir):
 # Her bir hücre değerinde normalizasyon işlemi gerçekleştirildi.
 
 # İkinci aşama tamamlandı!
+
+r.shuffle(veri) # Veriler satır sırasına göre rastgele karıştırıldı.
+
+egitim_veri = veri[0:round(satir * 0.8)] 
+# Toplam satır sayısının %80'iyle eğitim verisi oluşturuldu.
+
+test_veri = veri[-round(satir * 0.2):]
+# Toplam satır sayısının %20'siyle test verisi oluşturuldu.
+
+# Üçüncü aşama tamamlandı!
