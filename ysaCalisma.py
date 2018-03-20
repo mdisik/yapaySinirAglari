@@ -36,3 +36,11 @@ for i in range(satir):
 # Her bir hücre değeri ondalıklı sayıya çevrildi.
 
 # Birinci aşama tamamlandı!
+
+for i in range(satir):
+    for j in range(sutun):
+        veri[i][j] = abs(veri[i][j] - min(veri[i])) / abs(max(veri[i]) - min(veri[i]))
+
+# Her bir hücre değerinde normalizasyon işlemi gerçekleştirildi.
+
+# İkinci aşama tamamlandı!
