@@ -53,4 +53,4 @@ egitim_veri = veri[0:round(satir * 0.8)]
 test_veri = veri[-round(satir * 0.2):]
 # Toplam satır sayısının %20'siyle test verisi oluşturuldu.
 
-# Üçüncü aşama tamamlandı!
+# Üçüncü ve dördüncü aşama tamamlandı!
