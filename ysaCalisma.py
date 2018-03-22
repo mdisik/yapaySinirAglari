@@ -123,6 +123,8 @@ while iterasyon < 5:
             for j in range(ara_katman):
                 ara_katmani[i][j] = 1 / (1 + (m.e ** (-ara_katmani[i][j])))
         
+        print(ara_katmani)
+        
         # İleriye eğimli ara-çıktı katman ağırlık matrisinin oluşturulması
         for i in range(ara_katman):
             a_c_gecis += [[0] * cikti]
@@ -145,11 +147,7 @@ while iterasyon < 5:
         for i in range(1):
             for j in range(cikti):
                 cikti_katmani[i][j] = 1 / (1 + (m.e ** (-cikti_katmani[i][j])))
-        
-        for deger in cikti_katmani[1]:
-            cikti_vektor = deger
-        print(cikti_vektor)
-        
+                
         """
         Bu alan çalıştırıldığında iterasyon x satır sayısı kadar çıktı elde etmeyi sağlar!
         for i in range(1):
@@ -176,6 +174,26 @@ while iterasyon < 5:
         cikti_vektor = cikti_katmani[0]
         
         # Ara ve çıkış katmanı arasındaki ağırlık değişim hesabı
+        
+        a_c_vektor = [[0.5*i*j for j in ara_vektor] for i in cikti_vektor]
+                
+        if iterasyon == 0:
+            a_c_degisim = []
+            for i in range(len(ara_vektor)):
+                a_c_degisim += [[0] * len(cikti_vektor)]        
+        
+        for i in range(len(ara_vektor)):
+            for j in range(len(cikti_vektor)):
+                a_c_degisim[i][j] = a_c_vektor[i][j] + 0.01 * a_c_degisim[i][j]
+        
+         # 
+        
+        
+        
+        
+        
+        
+        sayac += 1
         
          
         
