@@ -29,22 +29,6 @@ for i in range(satir):
     print()
 """
 
-for i in range(satir):
-    for j in range(sutun):
-        veri[i][j] = float(veri[i][j])
-
-# Her bir hücre değeri ondalıklı sayıya çevrildi.
-
-# Birinci aşama tamamlandı!
-
-for i in range(satir):
-    for j in range(sutun):
-        veri[i][j] = abs(veri[i][j] - min(veri[i])) / abs(max(veri[i]) - min(veri[i]))
-
-# Her bir hücre değerinde normalizasyon işlemi gerçekleştirildi.
-
-# İkinci aşama tamamlandı!
-
 r.shuffle(veri) # Veriler satır sırasına göre rastgele karıştırıldı.
 
 egitim_veri = veri[0:round(satir * 0.8)] 
@@ -83,8 +67,6 @@ ara_katmani = []
 cikti_katmani = []
 g_a_gecis = []
 a_c_gecis = []
-g_a_degisim = []
-a_c_degisim = []
 hata = []
 
 
@@ -102,7 +84,7 @@ while iterasyon < 5:
         # İleriye eğimli girdi-ara katman ağırlık matrisinin oluşturulması
         for i in range(girdi):
             g_a_gecis += [[0] * ara_katman]
-
+        
         for i in range(girdi):
             for j in range(ara_katman):
                 sayi = r.uniform(-1.0, 1.0)
@@ -123,7 +105,7 @@ while iterasyon < 5:
             for j in range(ara_katman):
                 ara_katmani[i][j] = 1 / (1 + (m.e ** (-ara_katmani[i][j])))
         
-        print(ara_katmani)
+        print("1. ara katman", ara_katmani)
         
         # İleriye eğimli ara-çıktı katman ağırlık matrisinin oluşturulması
         for i in range(ara_katman):
@@ -169,29 +151,60 @@ while iterasyon < 5:
             for j in range(cikti):
                 cikti_katmani[i][j] = (cikti_katmani[i][j]) * (1 - cikti_katmani[i][j]) * (hata[i][j])
         
-        # Çıtı katmanının ve ara katmanın listeye dönüşmesi
+        # Ara ve çıkış katmanı arasındaki ağırlık değişim hesabı
         ara_vektor = ara_katmani[0]
+        
         cikti_vektor = cikti_katmani[0]
         
-        # Ara ve çıkış katmanı arasındaki ağırlık değişim hesabı
+        a_c_vektor = [[0.5*i*j for j in cikti_vektor] for i in ara_vektor]
         
-        a_c_vektor = [[0.5*i*j for j in ara_vektor] for i in cikti_vektor]
+        print(a_c_vektor)
                 
         if iterasyon == 0:
             a_c_degisim = []
             for i in range(len(ara_vektor)):
                 a_c_degisim += [[0] * len(cikti_vektor)]        
         
-        for i in range(len(ara_vektor)):
-            for j in range(len(cikti_vektor)):
+        for i in range(ara_katman):
+            for j in range(cikti):
                 a_c_degisim[i][j] = a_c_vektor[i][j] + 0.01 * a_c_degisim[i][j]
+           
+        ara_katmani_degisim = []
         
-         # 
+        for i in range(ara_katman):
+            ara_katmani_degisim += [[0] * 1] 
+        
+        
+        """for i in range(1):
+            for j in range(ara_katman):
+                ara_katmani[i][j] = (ara_katmani[i][j]) * (1 - ara_katmani[i][j]) * deger
+            deger = 0"""
         
         
         
+        # Girdi ve ara katmanı arasındaki ağırlık değişim hesabı
+        
+        girdi_vektor = girdi_katmani[0]
+        ara_vektor = ara_katmani[0]        
+        g_a_vektor = [[0.5*i*j for j in girdi_vektor] for i in ara_vektor]
+        
+        if iterasyon == 0:
+            g_a_degisim = []
+            for i in range(len(girdi_vektor)):
+                g_a_degisim += [[0] * ara_vektor]
+        
+        for i in range(len(girdi_vektor)):
+            for j in range(len(ara_vektor)):
+                g_a_degisim[i][j] = g_a_vektor[i][j] + 0.01 * g_a_degisim[i][j]
         
         
+        for i in range(ara_katman):
+            for i in range(cikti):
+                a_c_gecis[i][j] = a_c_gecis[i][j] + a_c_degisim[i][j]
+        
+        for i in range(girdi):
+            for i in range(ara_katman):
+                g_a_gecis[i][j] = g_a_gecis[i][j] + g_a_degisim[i][j]
         
         sayac += 1
         
